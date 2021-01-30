@@ -1,6 +1,7 @@
 package com.example.braintrainer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     Button button2;
     Button button3;
     Button playAgainButton;
+    Button goButton;
+    ConstraintLayout gameLayout;
 
     public void playAgain(View view){
         playAgainButton.setVisibility(View.INVISIBLE);
@@ -74,15 +77,12 @@ public class MainActivity extends AppCompatActivity {
         newQuestion();
     }
 
-    public void show(View view){
-        TextView textView = (TextView) findViewById(R.id.text);
-        textView.setVisibility(View.VISIBLE);
+    public void showGame(View view){
+        goButton.setVisibility(View.INVISIBLE);
+        gameLayout.setVisibility(View.VISIBLE);
+        startGame();
     }
 
-    public void hide(View view){
-        TextView textView = (TextView) findViewById(R.id.text);
-        textView.setVisibility(View.INVISIBLE);
-    }
 
     public void newQuestion(){
         Random random = new Random();
@@ -116,7 +116,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        goButton = (Button) findViewById(R.id.goButton);
+        goButton.setVisibility(View.VISIBLE);
+        gameLayout = (ConstraintLayout) findViewById(R.id.gameLayout);
+        gameLayout.setVisibility(View.INVISIBLE);
+    }
 
+    private void startGame() {
         problemText = (TextView) findViewById(R.id.problemText);
         scoreText = (TextView) findViewById(R.id.scoreText);
         resultText = (TextView) findViewById(R.id.resultText);
